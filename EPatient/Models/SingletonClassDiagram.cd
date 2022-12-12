@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EPatient.Models.LoginFormSingleton">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAgAAAgAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\LoginFormSingleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EPatient.Views.AdminForm">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACOCAAICAAAJQEQASAAAICAAQAAAAAYAAAIWACAAA=</HashCode>
+      <FileName>Views\AdminForm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="loginFormSingleton" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

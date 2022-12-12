@@ -3,21 +3,25 @@ using System.Drawing;
 using System.Windows.Forms;
 using EPatient.Models.Auth;
 using EPatient.Views.Admin;
+using EPatient.Models;
+using EPatient.Models.Languages;
 
 namespace EPatient.Views
 {
     public partial class AdminForm : MetroFramework.Forms.MetroForm
     {
         private Button[] _menuButtons;
+        public static LoginFormSingleton loginFormSingleton = LoginFormSingleton.getInstance();
+        private static LanguageState languageState = new LanguageState();
+        private Words language = languageState.selectedLanguage();
         public AdminForm()
         {
             InitializeComponent();
+            changeLanguagePanel();
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
-            labelName.Text = AuthUser.Model.Name + " " + AuthUser.Model.Surname;
-
             _menuButtons = new[]
             {
                 usersMenuButton,
@@ -115,10 +119,22 @@ namespace EPatient.Views
         {
             AuthUser.Model = null;
             this.Hide();
-            LoginForm loginForm = new LoginForm();
+            LoginForm loginForm = loginFormSingleton.getLoginForm();
             loginForm.Show();
         }
 
+        private void changeLanguagePanel()
+        {
+            this.Text = language.getHeader();
+            label1.Text = language.getHeader();
+            usersMenuButton.Text = language.getUsers();
+            workingHoursMenuButton.Text = language.getWorkingHours();
+            emergencyDoctorMenuButton.Text = language.getDoctorOnDuty();
+            servicesMenuButton.Text = language.getServices();
+            pavilionsMenuButton.Text = language.getBuilding();
+            basicReportsMenuButton.Text = language.getBasicReports();
+            advancedReportsMenuButton.Text = language.getAdvancedReports();
+        }
        
     }
 }

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
 using EPatient.Models;
+using EPatient.Models.Languages;
 using EPatient.Models.Auth;
 using EPatient.Utilities;
 using EPatient.Views;
@@ -11,12 +12,15 @@ namespace EPatient
 {
     public partial class LoginForm : MetroFramework.Forms.MetroForm
     {
-        private readonly Login _helper;
+        private readonly ProxyLogin _helper;
+        public static LangugageFactory langFactory = new LangugageFactory();
+        public static Words language = langFactory.getLanguage("Albanian");
+        private LanguageState languageState = new LanguageState();
 
         public LoginForm()
         {
             InitializeComponent();
-            _helper = new Login();
+            _helper = new ProxyLogin();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -45,7 +49,7 @@ namespace EPatient
                     mainForm.Show();
                 }
                 else
-                    MetroFramework.MetroMessageBox.Show(this, "Kredenciale te gabuara!", "Error", MessageBoxButtons.OK,
+                    MetroFramework.MetroMessageBox.Show(this, language.getErrorCredentials(), "Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
             }         
         }
@@ -67,18 +71,43 @@ namespace EPatient
             {
                 e.Cancel = true;
                 textUsername.Focus();
-                loginErrorProvider.SetError(textUsername, "Ju lutem vendosni username");
+                loginErrorProvider.SetError(textUsername, language.getErrorUsername());
             }
             else
             {
                 e.Cancel = false;
-                loginErrorProvider.SetError(textUsername,null);
+                loginErrorProvider.SetError(textUsername, language.getErrorUsername());
             }
         }
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
              Application.Exit();
+        }
+
+        private void English_Click(object sender, EventArgs e)
+        {
+            languageState.setLanguageState("English");
+            Update_Values();
+        }
+
+        private void Albanian_Click(object sender, EventArgs e)
+        {
+            languageState.setLanguageState("Albanian");
+            Update_Values();
+        }
+
+        private void Spanish_Click(object sender, EventArgs e)
+        {
+            languageState.setLanguageState("Spanish");
+            Update_Values();
+        }
+
+        private void Update_Values()
+        {
+            language = langFactory.getLanguage(languageState.getLanguageState());
+            checkBoxRememberMe.Text = language.getRememberMe();
+            buttonLogin.Text = language.getLogin();
         }
     }
 }

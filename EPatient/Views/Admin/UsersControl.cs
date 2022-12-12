@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Forms;
 using EPatient.Models;
+using EPatient.Models.Languages;
 using EPatient.Views.Admin;
 using MetroFramework;
 
@@ -9,11 +10,14 @@ namespace EPatient
 {
     public partial class UsersControl : MetroFramework.Controls.MetroUserControl
     {
+        private static LanguageState languageState = new LanguageState();
+        private Words language = languageState.selectedLanguage();
         private EPatientContext _context;
 
         public UsersControl()
         {
             InitializeComponent();
+            changeLanguageUserControls();
         }
         
         private void UsersControl_Load(object sender, EventArgs e)
@@ -118,6 +122,15 @@ namespace EPatient
                 _context.Timetables.RemoveRange(user.Timetables);
                 _context.SaveChanges();
             }
+        }
+
+        private void changeLanguageUserControls()
+        {
+            btnAdd.Text = language.getAdd();
+            btnEdit.Text = language.getEdit();
+            btnDelete.Text = language.getDelete();
+            groupBox1.Text = language.getActions();
+            gridView.Columns[5].HeaderText = language.getBuilding();
         }
     }
 }

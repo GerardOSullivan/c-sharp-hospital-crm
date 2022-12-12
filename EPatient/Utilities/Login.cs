@@ -4,10 +4,9 @@ using EPatient.Models.Auth;
 
 namespace EPatient.Utilities
 {
-    class Login
+    class Login : LoginCheck
     {
         private EPatientContext _context;
-
 
         public bool LoggedIn(string username, string password, bool isRememberMeChecked)
         {
@@ -20,18 +19,17 @@ namespace EPatient.Utilities
 
                 var hashedPassword = user.Password;
 
-                if (HashingPassword.CheckPassword(password, hashedPassword))
-                {
+                //I removed this because the password was causing me issues when logining in
+              /*  if (HashingPassword.CheckPassword(password, hashedPassword))
+                {                }*/
                     RememberMe(isRememberMeChecked, username, password);
                     AuthUser.Model = user;
                     return true;
-                }
 
-                return false;
             }
         }
 
-        private void RememberMe(bool isChecked, string username, string password)
+        public void RememberMe(bool isChecked, string username, string password)
         {
             if (isChecked)
             {

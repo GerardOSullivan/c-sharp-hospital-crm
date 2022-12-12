@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
+using EPatient.Models;
 using EPatient.Views;
 
 namespace EPatient
@@ -26,7 +27,8 @@ namespace EPatient
             Thread.Sleep(3000);
             t.Abort();
             //End SplashScreen
-            Application.Run(new LoginForm());
+            LoginFormSingleton loginFormSingleton = LoginFormSingleton.getInstance();
+            Application.Run(loginFormSingleton.getLoginForm());
         }
 
     }
