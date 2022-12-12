@@ -13,7 +13,7 @@ namespace EPatient
     public partial class LoginForm : MetroFramework.Forms.MetroForm
     {
         private readonly ProxyLogin _helper;
-        public static LangugageFactory langFactory = new LangugageFactory();
+        public static LanguageFactory langFactory = new LanguageFactory();
         public static Words language = langFactory.getLanguage("Albanian");
         private LanguageState languageState = new LanguageState();
 

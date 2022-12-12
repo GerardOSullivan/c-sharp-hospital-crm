@@ -145,7 +145,7 @@
     <Compile Include="Models\Languages\EnglishWords.cs" />
     <Compile Include="Models\Languages\AdditionalWords.cs" />
     <Compile Include="Models\Languages\Words.cs" />
-    <Compile Include="Models\Languages\LangugageFactory.cs" />
+    <Compile Include="Models\Languages\LanguageFactory.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
